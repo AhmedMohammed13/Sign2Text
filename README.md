@@ -11,10 +11,7 @@ A real-time application for detecting and recognizing sign language gestures usi
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Project Report](#project-report)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+
 
 ## Aim
 
@@ -95,12 +92,6 @@ cd sign2text
     ```
 
 4. The web interface will display the webcam feed and detected sign language gestures.
-
-## Project Report
-For detailed insights, analysis, and findings, refer to the Project Report provided in the repository or [click here](https://drive.google.com/file/d/1he-xNEdvnj6nGKRLIHwnSalA8uVaDp3C/view?usp=sharing).
-
-## Contributing
-Contributions are welcome! If you'd like to contribute to this project, feel free to open issues, create pull requests, or reach out to discuss potential improvements.
 
 
 
