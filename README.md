@@ -6,7 +6,6 @@ A real-time application for detecting and recognizing sign language gestures usi
 
 - [Aim](#aim)
 - [Project Overview](#project-overview)
-- [Demo](#demo)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -34,16 +33,6 @@ This project leverages Flask for the web interface and TensorFlow/Keras for the 
 <img src="sign%20language%202.jpg"  width="60%"/>
 
 > Custom Sign Language for Words / Sentences.
-
-## Demo
-
-Showcasing a demonstration of the Realtime Sign Language Detection 
-
-
-
-https://github.com/user-attachments/assets/36d57256-4a54-4977-b54c-4cf615ab5204
-
-
 
 ## Features
 * **Real-time sign language recognition**: Captures hand gestures using the Mediapipe library to track landmarks and movements.
