@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sign2Text - Sign Language to Text Translation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Icons & Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #000428, #004683);
+            background-repeat: no-repeat;
+        }
+
+        .hero-header {
+            background: linear-gradient(rgba(219, 234, 253, 0.24), rgba(116, 89, 122, 0.19)),
+                url("https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            margin: 0 auto;
+            padding: 0;
+
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+
+        /* .controls {
+            margin-top: 1rem;
+        } */
+
+        .controls input {
+            flex: 1;
+        }
+        .container-fluid{
+          padding: 0;
+          margin: 0;
+        }
+        .py-5{
+padding-top: 0rem !important;
+    padding-bottom: 0rem !important        }
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+
+            .controls input {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="container-fluid py-5 mb-5 hero-header">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 video-container text-center">
+                    <img src="{{ url_for('video_feed') }}" class="img-fluid"
+                        alt="Video Feed" style="width: 100%; height: auto;" />
+                    
+                    <!-- Controls -->
+                    <div class="controls d-flex align-items-center justify-content-center flex-wrap mt-3">
+                        <input type="text" id="translatedText" class="form-control me-2 mb-2"
+                            placeholder="Translated text will appear here" />
+                        <button id="resetButton" class="btn btn-danger me-2 mb-2">Reset</button>
+                        <button id="speakButton" class="btn btn-primary mb-2">Speak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+
+  <script>
+    const socket = io();
+
+    // ✅ تجميع الأحرف في خانة الترجمة
+    socket.on('prediction', function (data) {
+        document.getElementById('translatedText').value += data.text;
+    });
+
+    // 🔁 زر إعادة التعيين
+    document.getElementById('resetButton').addEventListener('click', function () {
+        document.getElementById('translatedText').value = '';
+    });
+
+    // 🔊 زر النطق
+    document.getElementById('speakButton').addEventListener('click', function () {
+        const text = document.getElementById('translatedText').value;
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voices = speechSynthesis.getVoices();
+        utterance.voice = voices.find(voice => voice.name === 'Google UK English Female') || voices[0];
+        utterance.rate = 1.0;
+        speechSynthesis.speak(utterance);
+    });
+</script>
+
+</body>
+
+</html>
+
